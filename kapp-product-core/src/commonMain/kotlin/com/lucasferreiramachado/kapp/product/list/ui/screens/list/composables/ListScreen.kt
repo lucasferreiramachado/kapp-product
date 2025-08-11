@@ -10,7 +10,6 @@ fun ListScreen(
     viewModel: ListViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-
     ListView(
         state = state,
         onEvent = { event ->

@@ -1,5 +1,6 @@
 package com.lucasferreiramachado.kapp.product.purchase.ui.screens.address.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -21,7 +22,8 @@ fun AddressView(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .safeContentPadding(),
+            .safeContentPadding()
+            .background(MaterialTheme.colorScheme.background),
     ) {
 
         Column(modifier = Modifier
@@ -68,7 +70,7 @@ fun AddressView(
             }
         }
 
-        Text(text = "KApp Compose Sample",
+        Text(text = "KApp: Kotlin Multiplatform Multimodular App",
             modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.BottomCenter),
             textAlign = TextAlign.Center,
             fontSize = 14.sp,
@@ -78,7 +80,7 @@ fun AddressView(
 }
 
 @Composable
-private fun AddressItem(label: String, onClick: () -> Unit): Unit {
+private fun AddressItem(label: String, onClick: () -> Unit) {
 
     OutlinedButton(
         onClick = onClick,

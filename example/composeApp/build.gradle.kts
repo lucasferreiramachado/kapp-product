@@ -17,6 +17,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlinxSerialization)
     id("com.vanniktech.maven.publish") version "0.28.0"
 }
 
@@ -76,10 +77,17 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-
+            implementation(libs.navigation.compose)
+            implementation(libs.material.icons.core)
+            implementation(libs.material.icons.extended)
+            implementation(libs.kcoordinator)
+            implementation(libs.kcoordinator.navigation.compose)
             implementation(project(":kapp-product-core"))
-
-//            implementation("io.github.lucasferreiramachado:kapp-product:0.1.0")
+            implementation(libs.kapp.auth)
+            implementation(libs.kapp.deeplink)
+            implementation(libs.kapp.data.product)
+            implementation(libs.kapp.data.purchase)
+            implementation(libs.kapp.data.user)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

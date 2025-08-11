@@ -3,15 +3,12 @@ package com.lucasferreiramachado.kapp.product
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.lucasferreiramachado.kapp.data.product.model.Product
+import com.lucasferreiramachado.kapp.data.purchase.model.ShoppingCartProduct
+import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinatorAction
+import com.lucasferreiramachado.kapp.product.purchase.ui.coordinator.PurchaseProductCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.KCoordinator
 import com.lucasferreiramachado.kcoordinator.KCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.compose.ComposeKCoordinator
-import com.lucasferreiramachado.kapp.product.di.PurchaseProductCoordinatorFactory
-import com.lucasferreiramachado.kapp.product.di.ProductListCoordinatorFactory
-import com.lucasferreiramachado.kapp.product.purchase.PurchaseProductCoordinatorAction
-import com.lucasferreiramachado.kapp.product.list.ProductListCoordinatorAction
-import com.lucasferreiramachado.kapp.data.purchase.model.ShoppingCartProduct
-
 
 sealed class ProductsCoordinatorAction: KCoordinatorAction {
     data object StartProductList : ProductsCoordinatorAction()
@@ -20,12 +17,15 @@ sealed class ProductsCoordinatorAction: KCoordinatorAction {
 }
 
 class ProductsCoordinator(
-    purchaseProductCoordinatorFactory: PurchaseProductCoordinatorFactory = PurchaseProductCoordinatorFactory(),
-    productListCoordinatorFactory: ProductListCoordinatorFactory = ProductListCoordinatorFactory(),
+    factory: ProductsCoordinatorFactoryI,
     override val parent: KCoordinator<*>
 ) : ComposeKCoordinator<ProductsCoordinatorAction> {
-    private val purchaseProductCoordinator = purchaseProductCoordinatorFactory.create(parent = this)
-    private val productListCoordinator = productListCoordinatorFactory.create(parent = this)
+    private val purchaseProductCoordinator = factory.purchaseProductCoordinatorFactory.create(
+        parent = this
+    )
+    private val productListCoordinator = factory.productListCoordinatorFactory.create(
+        parent = this
+    )
 
     private var navHostController: NavHostController? = null
 

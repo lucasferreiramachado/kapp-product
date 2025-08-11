@@ -2,7 +2,7 @@ package com.lucasferreiramachado.kapp.product.list.ui.screens.detail
 
 import androidx.lifecycle.ViewModel
 import com.lucasferreiramachado.kcoordinator.KCoordinator
-import com.lucasferreiramachado.kapp.product.list.ProductListCoordinatorAction
+import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinatorAction
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

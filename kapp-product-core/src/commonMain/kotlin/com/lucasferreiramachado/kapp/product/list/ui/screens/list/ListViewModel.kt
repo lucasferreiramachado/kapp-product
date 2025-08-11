@@ -1,17 +1,20 @@
 package com.lucasferreiramachado.kapp.product.list.ui.screens.list
 
 import androidx.lifecycle.ViewModel
-import com.lucasferreiramachado.kapp.data.product.model.Product
+import androidx.lifecycle.viewModelScope
+import com.lucasferreiramachado.kapp.product.list.domain.usecases.GetProductsUseCase
+import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.KCoordinator
-import com.lucasferreiramachado.kapp.product.list.ProductListCoordinatorAction
-
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class ListViewModel(
+open class ListViewModel(
     initialState: ListUiState = ListUiState(),
     var coordinator: KCoordinator<ProductListCoordinatorAction>? = null,
+    val getProductsUseCase: GetProductsUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<ListUiState> = _state.asStateFlow()
@@ -21,12 +24,19 @@ class ListViewModel(
             is ListUiEvent.BackButtonPressed -> {
                 coordinator?.trigger(ProductListCoordinatorAction.GoBack)
             }
-            is ListUiEvent.ProductItemSelectedAt -> {
-                val index = event.index
-                val selectedProduct = state.value.products.getOrNull(index)
-                selectedProduct?.let {
-                    coordinator?.trigger(ProductListCoordinatorAction.ShowDetail(it))
-                }
+            is ListUiEvent.ProductItemSelected -> {
+                coordinator?.trigger(ProductListCoordinatorAction.ShowDetail(event.item))
+            }
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+            val products = getProductsUseCase.execute()
+            _state.update { state ->
+                state.copy(
+                    products = products
+                )
             }
         }
     }

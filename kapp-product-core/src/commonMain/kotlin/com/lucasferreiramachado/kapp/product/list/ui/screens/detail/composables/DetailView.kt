@@ -1,5 +1,6 @@
 package com.lucasferreiramachado.kapp.product.list.ui.screens.detail.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -21,7 +22,8 @@ fun DetailView(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .safeContentPadding(),
+            .safeContentPadding()
+            .background(MaterialTheme.colorScheme.background),
     ) {
 
         Column(modifier = Modifier
@@ -88,7 +90,7 @@ fun DetailView(
             }
         }
 
-        Text(text = "KApp Compose Sample",
+        Text(text = "KApp: Kotlin Multiplatform Multimodular App",
             modifier = Modifier.fillMaxWidth().padding(16.dp).align(Alignment.BottomCenter),
             textAlign = TextAlign.Center,
             fontSize = 14.sp,
