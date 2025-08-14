@@ -1,17 +1,14 @@
 package com.lucasferreiramachado.kapp.product.compose.app.ui.screens.splash.composables
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import com.lucasferreiramachado.kapp.product.compose.app.ui.screens.splash.SplashUiState
-import kotlinx.coroutines.CoroutineScope
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.lucasferreiramachado.kapp.product.compose.app.ui.screens.splash.SplashViewModel
 
 @Composable
 fun SplashScreen(
-    state: SplashUiState = SplashUiState(),
-    onSplashScreenLaunched: suspend CoroutineScope.() -> Unit
+    viewModel: SplashViewModel
 ) {
-    SplashView(state)
-    LaunchedEffect(key1 = "splashScreenLaunched") {
-        onSplashScreenLaunched()
-    }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    SplashView(state) {  event -> viewModel.onEvent(event) }
 }

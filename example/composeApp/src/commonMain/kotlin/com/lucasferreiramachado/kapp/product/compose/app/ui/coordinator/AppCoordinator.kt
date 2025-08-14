@@ -11,13 +11,13 @@ import com.lucasferreiramachado.kapp.product.compose.di.ExampleCoordinatorFactor
 import com.lucasferreiramachado.kapp.product.compose.example.ui.coordinator.ExampleCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.KCoordinator
 import com.lucasferreiramachado.kcoordinator.compose.RootComposeKCoordinator
-import kotlinx.coroutines.delay
 
 class AppCoordinator(
     exampleCoordinatorFactory: ExampleCoordinatorFactory = ExampleCoordinatorFactory(),
     override val parent: KCoordinator<*>? = null
 ) : RootComposeKCoordinator<AppCoordinatorAction> {
     private var navHostController: NavHostController? = null
+    private var initialAction: AppCoordinatorAction? = null
     private var exampleCoordinator = exampleCoordinatorFactory.create(parent = this)
 
     override fun handle(action: AppCoordinatorAction) {
@@ -28,6 +28,10 @@ class AppCoordinator(
             is AppCoordinatorAction.GoToBackScreen -> {
                 navHostController?.popBackStack()
             }
+            is AppCoordinatorAction.AppInitialized -> {
+                navHostController?.popBackStack()
+                initialAction?.let { trigger(it) }
+            }
         }
     }
 
@@ -36,18 +40,13 @@ class AppCoordinator(
         navGraphBuilder: NavGraphBuilder,
         navHostController: NavHostController,
     ) {
+        this.initialAction = initialAction
         this.navHostController = navHostController
 
         exampleCoordinator.setupNavigation(navGraphBuilder, navHostController)
 
         navGraphBuilder.deeplinkNavigation(this)
-        navGraphBuilder.splashNavigation(
-            onSplashScreenLaunched = {
-                delay(1500)
-                navHostController.popBackStack()
-                trigger(initialAction)
-            }
-        )
+        navGraphBuilder.splashNavigation(this)
     }
 
     @Composable

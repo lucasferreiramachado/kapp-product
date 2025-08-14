@@ -9,20 +9,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.lucasferreiramachado.kapp.product.compose.app.ui.screens.splash.SplashUiEvent
 import com.lucasferreiramachado.kapp.product.compose.app.ui.screens.splash.SplashUiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
 fun SplashScreenPreview(
-    state: SplashUiState = SplashUiState()
+    state: SplashUiState = SplashUiState(),
+    events: List<SplashUiEvent> = emptyList()
 ) {
-    SplashView(state)
+    previewSplashScreen(state, events)
 }
 
 @Composable
 fun SplashView(
-    state: SplashUiState
+    state: SplashUiState,
+    onEvent: (SplashUiEvent) -> Unit
 ) {
     Box(
         modifier = Modifier
