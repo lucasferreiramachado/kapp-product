@@ -3,8 +3,9 @@ package com.lucasferreiramachado.kapp.product.list.ui.screens.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lucasferreiramachado.kapp.product.list.domain.usecases.GetProductsUseCase
+import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinator
 import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinatorAction
-import com.lucasferreiramachado.kcoordinator.KCoordinator
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +14,7 @@ import kotlinx.coroutines.launch
 
 open class ListViewModel(
     initialState: ListUiState = ListUiState(),
-    var coordinator: KCoordinator<ProductListCoordinatorAction>? = null,
+    var coordinator: ProductListCoordinator,
     val getProductsUseCase: GetProductsUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState)
@@ -22,21 +23,23 @@ open class ListViewModel(
     fun onEvent(event: ListUiEvent) {
         when (event) {
             is ListUiEvent.BackButtonPressed -> {
-                coordinator?.trigger(ProductListCoordinatorAction.GoBack)
+                coordinator.trigger(ProductListCoordinatorAction.GoBack)
             }
             is ListUiEvent.ProductItemSelected -> {
-                coordinator?.trigger(ProductListCoordinatorAction.ShowDetail(event.item))
+                coordinator.trigger(ProductListCoordinatorAction.ShowDetail(event.item))
             }
         }
     }
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             val products = getProductsUseCase.execute()
-            _state.update { state ->
-                state.copy(
-                    products = products
-                )
+            viewModelScope.launch(Dispatchers.Main) {
+                _state.update { state ->
+                    state.copy(
+                        products = products
+                    )
+                }
             }
         }
     }

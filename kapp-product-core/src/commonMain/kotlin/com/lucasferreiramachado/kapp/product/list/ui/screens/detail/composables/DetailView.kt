@@ -13,6 +13,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lucasferreiramachado.kapp.product.list.ui.screens.detail.DetailUiEvent
 import com.lucasferreiramachado.kapp.product.list.ui.screens.detail.DetailUiState
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+@Preview
+fun DetailScreenPreview(
+    state: DetailUiState = DetailUiState(),
+    events: List<DetailUiEvent> = emptyList()
+) {
+    previewDetailScreen(state, events)
+}
 
 @Composable
 fun DetailView(

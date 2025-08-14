@@ -85,6 +85,8 @@ kotlin {
             implementation(libs.kapp.deeplink)
             implementation(libs.kapp.data.product)
             implementation(libs.kapp.data.purchase)
+
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -93,6 +95,10 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0")
         }
     }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
 }
 
 android {

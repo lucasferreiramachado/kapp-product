@@ -69,6 +69,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -90,6 +91,7 @@ kotlin {
             implementation(libs.kapp.data.product)
             implementation(libs.kapp.data.purchase)
             implementation(libs.kapp.data.user)
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -106,6 +108,9 @@ kotlin {
     }
 }
 
+dependencies {
+    debugImplementation(compose.uiTooling)
+}
 android {
     namespace = "com.lucasferreiramachado.kapp.product.compose"
     compileSdk = libs.versions.android.compileSdk.get().toInt()

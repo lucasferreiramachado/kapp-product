@@ -13,6 +13,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lucasferreiramachado.kapp.data.product.model.Product
 import com.lucasferreiramachado.kapp.product.list.ui.screens.list.ListUiEvent
 import com.lucasferreiramachado.kapp.product.list.ui.screens.list.ListUiState
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -20,7 +21,15 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun ListScreenPreview(
-    state: ListUiState = ListUiState(),
+    state: ListUiState = ListUiState(
+        products = listOf(
+            Product(
+                name = "Product 1",
+                price = 5.99,
+                id = 1
+            )
+        )
+    ),
     events: List<ListUiEvent> = emptyList()
 ) {
     previewListScreen(state, events)

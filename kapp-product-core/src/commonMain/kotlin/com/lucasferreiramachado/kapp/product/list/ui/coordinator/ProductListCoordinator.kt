@@ -12,7 +12,6 @@ import com.lucasferreiramachado.kcoordinator.KCoordinator
 import com.lucasferreiramachado.kcoordinator.compose.ComposeKCoordinator
 
 class ProductListCoordinator(
-    val factory: ProductListCoordinatorFactoryI,
     override val parent: KCoordinator<*>
 ) : ComposeKCoordinator<ProductListCoordinatorAction> {
 
@@ -57,8 +56,8 @@ class ProductListCoordinator(
         this.navHostController = navHostController
 
         navGraphBuilder.apply {
-            listNavigation(this@ProductListCoordinator)
-            detailNavigation(this@ProductListCoordinator)
+            listNavigation()
+            detailNavigation()
         }
     }
 }
