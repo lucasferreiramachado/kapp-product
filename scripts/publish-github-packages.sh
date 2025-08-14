@@ -1,3 +1,3 @@
 killall java
 cd ..
-./gradlew publishAllPublicationsToGithubPackagesRepository --no-configuration-cache
+./gradlew :kapp-product-core:publishAllPublicationsToGithubPackagesRepository --no-configuration-cache
