@@ -6,7 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.checkout.CheckoutViewModel
 
 @Composable
-fun Checkout(
+fun CheckoutScreen(
     viewModel: CheckoutViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()

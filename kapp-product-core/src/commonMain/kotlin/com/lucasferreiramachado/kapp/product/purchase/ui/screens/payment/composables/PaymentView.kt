@@ -13,6 +13,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.payment.PaymentUiEvent
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.payment.PaymentUiState
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+@Preview
+fun PaymentScreenPreview(
+    state: PaymentUiState = PaymentUiState(),
+    events: List<PaymentUiEvent> = emptyList()
+) {
+    previewPaymentScreen(state, events)
+}
 
 @Composable
 fun PaymentView(

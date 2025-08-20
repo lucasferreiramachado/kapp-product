@@ -1,7 +1,7 @@
 package com.lucasferreiramachado.kapp.product.list.ui.screens.list.composables
 
 import androidx.compose.runtime.Composable
-import com.lucasferreiramachado.kapp.product.di.previewModule
+import com.lucasferreiramachado.kapp.product.di.preview.previewProductList
 import com.lucasferreiramachado.kapp.product.list.ui.screens.list.ListUiEvent
 import com.lucasferreiramachado.kapp.product.list.ui.screens.list.ListUiState
 import com.lucasferreiramachado.kapp.product.list.ui.screens.list.ListViewModel
@@ -15,7 +15,7 @@ fun previewListScreen(
     events: List<ListUiEvent>
 ) {
     KoinApplicationPreview(
-        application = { modules(previewModule) }
+        application = { modules(previewProductList) }
     ) {
         val viewModel = koinViewModel<ListViewModel> {
             parametersOf(state)

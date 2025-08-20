@@ -17,7 +17,7 @@ kotlinx-serialization-plugin = "1.9.0"
 kcoordinator = "1.1.0"
 kappDeeplink = "1.0.0"
 kappData = "1.0.0"
-kappAuth = "1.0.0"
+kappAuth = "1.1.0"
 koin = "4.1.0"
 
 [libraries]

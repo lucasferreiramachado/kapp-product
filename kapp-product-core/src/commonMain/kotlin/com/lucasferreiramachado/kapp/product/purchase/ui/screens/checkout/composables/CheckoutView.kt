@@ -14,8 +14,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lucasferreiramachado.kapp.product.purchase.ui.screens.address.AddressUiState
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.checkout.CheckoutUiEvent
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.checkout.CheckoutUiState
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+@Preview
+fun CheckoutScreenPreview(
+    state: CheckoutUiState = CheckoutUiState(),
+    events: List<CheckoutUiEvent> = emptyList()
+) {
+    previewCheckoutScreen(state, events)
+}
 
 @Composable
 fun CheckoutView(

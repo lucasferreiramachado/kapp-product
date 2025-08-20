@@ -1,7 +1,7 @@
 package com.lucasferreiramachado.kapp.product.list.ui.screens.detail.composables
 
 import androidx.compose.runtime.Composable
-import com.lucasferreiramachado.kapp.product.di.previewModule
+import com.lucasferreiramachado.kapp.product.di.preview.previewProductList
 import com.lucasferreiramachado.kapp.product.list.ui.screens.detail.DetailUiEvent
 import com.lucasferreiramachado.kapp.product.list.ui.screens.detail.DetailUiState
 import com.lucasferreiramachado.kapp.product.list.ui.screens.detail.DetailViewModel
@@ -15,7 +15,7 @@ fun previewDetailScreen(
     events: List<DetailUiEvent>
 ) {
     KoinApplicationPreview(
-        application = { modules(previewModule) }
+        application = { modules(previewProductList) }
     ) {
         val viewModel = koinViewModel<DetailViewModel>(
             parameters = { parametersOf(
