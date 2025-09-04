@@ -7,18 +7,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.lucasferreiramachado.kapp.product.compose.app.ui.navigation.deeplinkNavigation
 import com.lucasferreiramachado.kapp.product.compose.app.ui.navigation.splashNavigation
-import com.lucasferreiramachado.kapp.product.compose.di.ExampleCoordinatorFactory
+import com.lucasferreiramachado.kapp.product.compose.example.ui.coordinator.ExampleCoordinator
 import com.lucasferreiramachado.kapp.product.compose.example.ui.coordinator.ExampleCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.KCoordinator
 import com.lucasferreiramachado.kcoordinator.compose.RootComposeKCoordinator
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
+import kotlin.getValue
 
 class AppCoordinator(
-    exampleCoordinatorFactory: ExampleCoordinatorFactory = ExampleCoordinatorFactory(),
     override val parent: KCoordinator<*>? = null
-) : RootComposeKCoordinator<AppCoordinatorAction> {
+) : RootComposeKCoordinator<AppCoordinatorAction>, KoinComponent {
     private var navHostController: NavHostController? = null
     private var initialAction: AppCoordinatorAction? = null
-    private var exampleCoordinator = exampleCoordinatorFactory.create(parent = this)
+    private val exampleCoordinator: ExampleCoordinator by inject { parametersOf(this) }
 
     override fun handle(action: AppCoordinatorAction) {
         when (action) {

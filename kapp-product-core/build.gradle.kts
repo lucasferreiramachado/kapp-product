@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
-val libraryVersion          = "1.0.0"
+val libraryVersion          = "1.1.0"
 val libraryNamespace        = "io.github.lucasferreiramachado"
 val frameworkLibraryName    = "KAppProduct" // execute gradle clean after changed it
 val libraryArtifact         = "kapp-product"
@@ -85,6 +85,8 @@ kotlin {
             implementation(libs.kapp.deeplink)
             implementation(libs.kapp.data.product)
             implementation(libs.kapp.data.purchase)
+
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -93,6 +95,10 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0")
         }
     }
+}
+
+dependencies {
+    debugImplementation(compose.uiTooling)
 }
 
 android {

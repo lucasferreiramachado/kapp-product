@@ -1,6 +1,7 @@
 package com.lucasferreiramachado.kapp.product.list.ui.screens.detail
 
 import androidx.lifecycle.ViewModel
+import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinator
 import com.lucasferreiramachado.kcoordinator.KCoordinator
 import com.lucasferreiramachado.kapp.product.list.ui.coordinator.ProductListCoordinatorAction
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class DetailViewModel(
     initialState: DetailUiState = DetailUiState(),
-    var coordinator: KCoordinator<ProductListCoordinatorAction>? = null,
+    var coordinator: ProductListCoordinator,
 ) : ViewModel() {
     private val _state = MutableStateFlow(initialState)
     val state: StateFlow<DetailUiState> = _state.asStateFlow()
@@ -17,10 +18,10 @@ class DetailViewModel(
     fun onEvent(event: DetailUiEvent) {
         when (event) {
             is DetailUiEvent.BackButtonPressed -> {
-                coordinator?.trigger(ProductListCoordinatorAction.GoBack)
+                coordinator.trigger(ProductListCoordinatorAction.GoBack)
             }
             is DetailUiEvent.BuyButtonPressed -> {
-                coordinator?.trigger(ProductListCoordinatorAction.StarBuyProductFlow)
+                coordinator.trigger(ProductListCoordinatorAction.StarBuyProductFlow)
             }
         }
     }

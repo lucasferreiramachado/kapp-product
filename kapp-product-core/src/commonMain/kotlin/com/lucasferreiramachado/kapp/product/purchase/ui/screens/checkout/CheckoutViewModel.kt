@@ -2,6 +2,7 @@ package com.lucasferreiramachado.kapp.product.purchase.ui.screens.checkout
 
 import androidx.lifecycle.ViewModel
 import com.lucasferreiramachado.kapp.product.purchase.domain.usecases.GetCurrentPurchaseUseCase
+import com.lucasferreiramachado.kapp.product.purchase.ui.coordinator.PurchaseProductCoordinator
 import com.lucasferreiramachado.kapp.product.purchase.ui.coordinator.PurchaseProductCoordinatorAction
 import com.lucasferreiramachado.kcoordinator.KCoordinator
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.update
 
 class CheckoutViewModel(
     initialState: CheckoutUiState = CheckoutUiState(),
-    val coordinator: KCoordinator<PurchaseProductCoordinatorAction>? = null,
+    val coordinator: PurchaseProductCoordinator,
     val getCurrentPurchaseUseCase: GetCurrentPurchaseUseCase
 ) : ViewModel() {
     private val _state: MutableStateFlow<CheckoutUiState> = MutableStateFlow(initialState)
@@ -34,10 +35,10 @@ class CheckoutViewModel(
     fun onEvent(event: CheckoutUiEvent) {
         when (event) {
             is CheckoutUiEvent.BackButtonPressed -> {
-                coordinator?.trigger(PurchaseProductCoordinatorAction.GoBack)
+                coordinator.trigger(PurchaseProductCoordinatorAction.GoBack)
             }
             is CheckoutUiEvent.ConfirmButtonPressed -> {
-                coordinator?.trigger(PurchaseProductCoordinatorAction.PurchaseRealized)
+                coordinator.trigger(PurchaseProductCoordinatorAction.PurchaseRealized)
             }
         }
     }

@@ -13,6 +13,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.address.AddressUiEvent
 import com.lucasferreiramachado.kapp.product.purchase.ui.screens.address.AddressUiState
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Composable
+@Preview
+fun AddressScreenPreview(
+    state: AddressUiState = AddressUiState(),
+    events: List<AddressUiEvent> = emptyList()
+) {
+    previewAddressScreen(state, events)
+}
 
 @Composable
 fun AddressView(
